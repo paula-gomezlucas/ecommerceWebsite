@@ -2,12 +2,18 @@ import { apiFetch, clearSession, BACKEND_BASE } from "./api.js";
 import { requireLogin, handleAuthError } from "./guards.js";
 
 const session = requireLogin("login.html");
+
+function formatName(name) {
+  if (!name) return "";
+  const s = String(name).trim().toLowerCase();
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
 if (!session) {
   // redirected
 } else {
-  document.getElementById(
-    "welcome"
-  ).textContent = `Hola, ${session.user.username}`;
+  document.getElementById("welcome").textContent =
+  `Hola, ${formatName(session.user.username)}`;
 
   const grid = document.getElementById("grid");
   const categorySelect = document.getElementById("category");

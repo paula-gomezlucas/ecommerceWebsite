@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Admin</title>
-
+  <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/admin.css">
 </head>
 
@@ -12,7 +12,7 @@
   <main class="container">
     <div class="topbar">
       <div>
-        <h1 style="margin:0;">Panel Admin</h1>
+        <h1 class="no-margin">Panel Admin</h1>
         <div class="muted" id="welcome"></div>
       </div>
       <div class="row">
@@ -30,10 +30,10 @@
 
     <!-- PRODUCTS -->
     <section id="productsSection" class="card">
-      <h2 style="margin-top:0;">Gestión de productos</h2>
+      <h2 class="no-margin">Gestión de productos</h2>
 
       <div class="card">
-        <h3 style="margin-top:0;">Crear producto</h3>
+        <h3 class="no-margin">Crear producto</h3>
         <div class="grid">
           <div>
             <label>Código</label>
@@ -44,12 +44,12 @@
             <input id="p_category" placeholder="electronics / home / ..."/>
           </div>
 
-          <div style="grid-column: 1 / -1;">
+          <div class="col-span-all">
             <label>Nombre</label>
             <input id="p_name" placeholder="Nombre del producto"/>
           </div>
 
-          <div style="grid-column: 1 / -1;">
+          <div class="col-span-all">
             <label>Descripción</label>
             <textarea id="p_description" placeholder="Descripción breve..."></textarea>
           </div>
@@ -63,18 +63,18 @@
             <input id="p_stock" type="number" step="1" min="0" />
           </div>
 
-          <div style="grid-column: 1 / -1;">
+          <div class="col-span-all">
             <label>Image URL (ej: /images/x.jpg)</label>
             <input id="p_imageurl" placeholder="/images/product.jpg"/>
           </div>
         </div>
 
-        <div style="margin-top:12px;">
+        <div class="mt-12">
           <button class="btn btn-primary" id="createProduct">Crear</button>
         </div>
       </div>
 
-      <h3>Lista de productos</h3>
+      <h3 class="no-margin">Lista de productos</h3>
       <div class="muted" id="productsCount"></div>
       <table>
         <thead>
@@ -88,7 +88,7 @@
 
     <!-- ORDERS -->
     <section id="ordersSection" class="card hidden">
-      <h2 style="margin-top:0;">Gestión de pedidos</h2>
+      <h2 class="no-margin">Gestión de pedidos</h2>
       <div class="muted">Se muestran pedidos en estado ORDER</div>
       <table>
         <thead>

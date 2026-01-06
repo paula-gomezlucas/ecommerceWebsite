@@ -17,8 +17,7 @@ if (!session) {
 
   document.getElementById("goOrders").addEventListener("click", () => {
     window.location.href = "orders.html";
-});
-
+  });
 
   document.getElementById("goCatalog").addEventListener("click", () => {
     window.location.href = "catalog.html";
@@ -45,17 +44,33 @@ if (!session) {
 
       for (const it of cart.items) {
         const row = document.createElement("div");
-        row.className = "item";
+        row.className = "card cart-item";
 
         const img = document.createElement("img");
+        img.className = "cart-item__img";
         img.src = `${BACKEND_BASE}${it.imageurl}`;
+        img.alt = it.name;
 
         const info = document.createElement("div");
-        info.innerHTML = `<strong>${it.name}</strong><br><span class="muted">${it.unitPrice.toFixed(2)} € / unidad</span>`;
+
+        const title = document.createElement("h3");
+        title.className = "cart-item__title";
+        title.textContent = it.name;
+
+        const meta = document.createElement("div");
+        meta.className = "muted cart-item__meta";
+        meta.textContent = `${it.unitPrice.toFixed(2)} € / unidad`;
+
+        info.appendChild(title);
+        info.appendChild(meta);
+
+        const controls = document.createElement("div");
+        controls.className = "cart-item__controls";
 
         const qty = document.createElement("input");
+        qty.className = "cart-qty";
         qty.type = "number";
-        qty.min = 1;
+        qty.min = "1";
         qty.value = it.quantity;
         qty.addEventListener("change", () => updateItem(it.itemId, qty.value));
 
@@ -67,11 +82,13 @@ if (!session) {
         del.textContent = "Eliminar";
         del.addEventListener("click", () => removeItem(it.itemId));
 
+        controls.appendChild(qty);
+        controls.appendChild(lineTotal);
+        controls.appendChild(del);
+
         row.appendChild(img);
         row.appendChild(info);
-        row.appendChild(qty);
-        row.appendChild(lineTotal);
-        row.appendChild(del);
+        row.appendChild(controls);
 
         list.appendChild(row);
       }
@@ -88,7 +105,7 @@ if (!session) {
     try {
       await apiFetch(`/orders/cart/items/${itemId}`, {
         method: "PUT",
-        body: JSON.stringify({ quantity: Number(quantity) })
+        body: JSON.stringify({ quantity: Number(quantity) }),
       });
       loadCart();
     } catch (err) {

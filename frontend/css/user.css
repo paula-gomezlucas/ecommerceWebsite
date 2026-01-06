@@ -1,32 +1,85 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f6f8;
+/* css/user.css */
+/* Page-specific overrides for user-facing pages.
+   Common components live in base.css */
+
+.filters {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
 }
 
-.container {
-    max-width: 500px;
-    margin: 100px auto;
-    background: white;
-    padding: 2rem;
-    border-radius: 8px;
-    text-align: center;
+.filters label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
-h1 {
-    color: #047857;
+#grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 12px;
 }
 
-.role {
-    font-weight: bold;
-    margin-top: 1rem;
+.product-card h3 { margin: 0 0 6px 0; }
+
+/* ------------------------------
+   Cart page styling
+   ------------------------------ */
+
+/* Container for each cart item row */
+.cart-item {
+  display: grid;
+  grid-template-columns: 90px 1fr auto;
+  gap: 12px;
+  align-items: center;
 }
 
-button {
-    margin-top: 2rem;
-    padding: 0.6rem 1.2rem;
-    border: none;
-    border-radius: 5px;
-    background-color: #047857;
-    color: white;
-    cursor: pointer;
+/* Cart item thumbnail */
+.cart-item__img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  background: #f3f3f3;
 }
+
+/* Title + meta block */
+.cart-item__title {
+  margin: 0;
+}
+
+.cart-item__meta {
+  margin-top: 6px;
+}
+
+/* Controls: quantity + remove button */
+.cart-item__controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+/* Quantity input in cart should not be full width */
+.cart-qty {
+  width: 80px;
+  min-width: 80px;
+  text-align: center;
+}
+
+/* Summary card at bottom */
+.cart-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.cart-summary__total {
+  font-size: 1.05rem;
+}
+
