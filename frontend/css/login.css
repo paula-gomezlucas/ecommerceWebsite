@@ -1,0 +1,23 @@
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    background: #9dbdf5;
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+.login-card {
+    background: white;
+    padding: 40px 32px;
+    width: 100%;
+    max-width: 380px;
+    border-radius: 12px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+    border: 1px solid #e5e7eb;
+}
