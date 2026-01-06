@@ -1,16 +1,27 @@
-// Recuperamos el usuario almacenado de localStorage
-const username = localStorage.getItem("username");
+import { requireLogin } from "./guards.js";
+import { clearSession } from "./api.js";
 
-// Mostramos el mensaje de bienvenida
-const welcomeMessage = document.getElementById("welcome");
-welcomeMessage.textContent = "Bienvenido, " + username;
+const session = requireLogin("login.html");
+if (!session) {
+  // redirected by guard
+} else {
+  document.getElementById("welcome").textContent = `Hola, ${session.user.username}`;
+  document.getElementById("role").textContent = `Rol: ${session.user.role}`;
 
-// Gestión del logout
-const logoutButton = document.getElementById("logout");
-logoutButton.addEventListener("click", () => {
+  document.getElementById("goCatalog").addEventListener("click", () => {
+    window.location.href = "catalog.html";
+  });
 
-    // Eliminamos el usuario actual de localStorage
-    localStorage.removeItem("username");
-    // Salimos al login de nuevo
+  document.getElementById("goCart").addEventListener("click", () => {
+    window.location.href = "cart.html";
+  });
+
+  document.getElementById("goOrders").addEventListener("click", () => {
+    window.location.href = "orders.html";
+  });
+
+  document.getElementById("logout").addEventListener("click", () => {
+    clearSession();
     window.location.href = "login.html";
-});
+  });
+}

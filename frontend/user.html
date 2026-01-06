@@ -1,31 +1,39 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Zona de Usuario</title>
-    <link rel="stylesheet" href="css/user.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Mi cuenta</title>
+  <link rel="stylesheet" href="css/user.css">
+  <style>
+    .container { max-width: 900px; margin: 0 auto; padding: 18px; }
+    .topbar { display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; }
+    .card { border:1px solid #ddd; border-radius:12px; padding:14px; background:#fff; }
+    .row { display:flex; gap:10px; flex-wrap:wrap; }
+    .btn { padding:10px 12px; border-radius:10px; border:0; cursor:pointer; background:#eee; }
+    .btn-primary { background:#2d6cdf; color:#fff; }
+    .muted { opacity:.75; }
+  </style>
 </head>
 <body>
+  <main class="container">
+    <div class="topbar">
+      <h1 style="margin:0;">Mi cuenta</h1>
+      <button class="btn" id="logout">Cerrar sesión</button>
+    </div>
 
-    <header>
+    <div class="card">
+      <p id="welcome" style="margin-top:0;"></p>
+      <p class="muted" id="role"></p>
 
-    </header>
+      <div class="row" style="margin-top:12px;">
+        <button class="btn btn-primary" id="goCatalog">Ir al catálogo</button>
+        <button class="btn" id="goCart">Ver carrito</button>
+        <button class="btn" id="goOrders">Mis pedidos</button>
+      </div>
+    </div>
+  </main>
 
-    <main class="container">
-        <h1>Zona de Usuario/Página principal</h1>
-
-        <p id="welcome"></p>
-
-        <p class="role">Rol: usuario</p>
-
-        <button id="logout">Cerrar sesión</button>
-    </main>
-
-    <footer>
-
-    </footer>
-
-    <script src="js/user.js"></script>
-
+  <script type="module" src="js/user.js"></script>
 </body>
 </html>

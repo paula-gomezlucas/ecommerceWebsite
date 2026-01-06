@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Carrito</title>
+  <link rel="stylesheet" href="css/user.css">
+  <style>
+    .topbar { display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; }
+    .list { display:flex; flex-direction:column; gap:12px; }
+    .item { display:grid; grid-template-columns: 80px 1fr auto auto auto; gap:12px; align-items:center; padding:12px; border:1px solid #ddd; border-radius:12px; }
+    img { width:80px; height:80px; object-fit:cover; border-radius:10px; background:#f3f3f3; }
+    input { width:70px; padding:6px; }
+    .btn { padding:8px 10px; border-radius:8px; border:0; cursor:pointer; }
+    .btn-danger { background:#c0392b; color:white; }
+    .btn-primary { background:#2d6cdf; color:white; }
+    .footer { margin-top:20px; display:flex; justify-content:space-between; align-items:center; }
+    .msg { margin-top:12px; }
+  </style>
+</head>
+
+<body>
+  <main class="container" style="max-width:1000px;">
+    <div class="topbar">
+      <h1>Carrito</h1>
+      <div>
+        <button class="btn" id="goCatalog">Catálogo</button>
+        <button class="btn" id="goOrders">Mis pedidos</button>
+        <button class="btn" id="logout">Cerrar sesión</button>
+
+      </div>
+    </div>
+
+    <p id="empty" class="muted"></p>
+
+    <div class="list" id="list"></div>
+
+    <div class="footer">
+      <strong id="total"></strong>
+      <button class="btn btn-primary" id="checkout">Finalizar compra</button>
+    </div>
+
+    <p class="msg" id="message"></p>
+  </main>
+
+  <script type="module" src="js/cart.js"></script>
+</body>
+</html>

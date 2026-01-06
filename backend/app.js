@@ -1,5 +1,7 @@
 import express from "express";
 import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
 
 // Rutas a los endpoints de productos
 import productsRoutes from "./src/routes/products.routes.js";
@@ -22,6 +24,8 @@ app.use(cors());
 // Habilitar json como medio de intercambio de info
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use("/images", express.static("public/images"));
 
 // Ruta de prueba
 app.get("/", (req, res) => {

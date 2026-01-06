@@ -1,117 +1,57 @@
-// Agregar un evento al hacer click en el botón de Iniciar Sesión
+// frontend/js/login.js
+import { apiFetch, setSession } from "./api.js";
+
+const usernameInput = document.getElementById("username");
+const passwordInput = document.getElementById("password");
+const errorMessage = document.getElementById("error-message");
+
 document.getElementById("btn-login").addEventListener("click", async (event) => {
+  event.preventDefault();
+  errorMessage.style.color = "#cc0000";
+  errorMessage.textContent = "";
 
-    // detenemos la ejecución
-    event.preventDefault();
+  try {
+    const username = usernameInput.value.trim();
+    const password = passwordInput.value;
 
-    // seleccionamos los datos de login que introduce el usuario
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
+    const session = await apiFetch("/users", {
+      method: "POST",
+      body: JSON.stringify({ username, password })
+    });
 
-    // seleccionamos el p donde vamos a indicar en caso de que el lodgin sea incorrecto
-    const errorMessage = document.getElementById("error-message");
+    // session expected from backend: { token, user: { id, username, role } }
+    setSession(session);
 
-    // Borramos el mensaje de error si el usuario vuelve a clicar
-    errorMessage.textContent = "";
-
-    // consultar las credenciales a través de la API de usuarios
-    try {
-
-        // preparamos los datos de login
-        const loginData ={};
-        loginData.username = username;
-        loginData.password = password;
-
-        // convertimos los datos a JSON
-        const bodyData = JSON.stringify(loginData);
-
-        // Hacemos la petición a la API
-        const response = await fetch("http://localhost:3000/api/users", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: bodyData
-        });
-
-        // leemos la respuesta del servidor
-        const data = await response.json();
-
-        console.log("Mensaje: ", data.message);
-        console.log("Usuario: ", data.username);
-        console.log("Rol: ", data.role);
-        console.log("Error: ", data.error);
-
-        // Si la API me devuelve error, el login ha fallado
-        if (data.error !== undefined){
-
-            // Mostramos el mensaje de error en la web
-            errorMessage.textContent = data.error;
-
-            return;
-        }
-
-        // Si el login es correcto, almacenamos el username en localStorage
-        localStorage.setItem("username", data.username);
-
-        // redireccionamos según rol
-        if (data.role === "admin") {
-            window.location.href = "admin.html";
-        } else {
-            window.location.href = "user.html";
-        }
-                
-    } catch {
-        errorMessage.textContent = data.error;
-        // errorMessage.textContent = "No se puede conectar con el servidor";
+    if (session.user.role === "admin") {
+      window.location.href = "admin.html";
+    } else {
+      window.location.href = "catalog.html";
     }
+  } catch (err) {
+    errorMessage.textContent = err.message || "Login failed";
+  }
 });
 
-// REGISTRO DE NUEVO USUARIO
-document.getElementById("btn-register").addEventListener("click", async (event) =>{
+document.getElementById("btn-register").addEventListener("click", async (event) => {
+  event.preventDefault();
+  errorMessage.style.color = "#cc0000";
+  errorMessage.textContent = "";
 
-    event.preventDefault();
+  try {
+    const username = usernameInput.value.trim();
+    const password = passwordInput.value;
 
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
+    await apiFetch("/users/register", {
+      method: "POST",
+      body: JSON.stringify({ username, password })
+    });
 
-    const errorMessage = document.getElementById("error-message");
-    errorMessage.textContent = "";
+    errorMessage.style.color = "green";
+    errorMessage.textContent = "Usuario registrado correctamente. Ya puedes iniciar sesión.";
 
-    try {
-
-        const registerData = {
-            username: username,
-            password: password
-        };
-
-        // Enviamos la petición a la API de registro
-        const response = await fetch("http://localhost:3000/api/users/register", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(registerData)
-        });
-        
-        const data = await response.json();
-
-        // Si la API devuelve error
-        if (data.error !== undefined){
-            errorMessage.textContent = data.error;
-            return;
-        }
-
-        // si la API devuelve success
-        errorMessage.style.color = "green";
-        errorMessage.textContent = "Usuario registrado correctamente. Por favor inicia sesión con tus nuevas credenciales.";
-
-        // Borramos los campos rellenados por el usuario
-        document.getElementById("username").value = "";
-        document.getElementById("password").value = "";
-
-    } catch (error) {
-        errorMessage.textContent = data.error;
-        
-    }
+    usernameInput.value = "";
+    passwordInput.value = "";
+  } catch (err) {
+    errorMessage.textContent = err.message || "Register failed";
+  }
 });

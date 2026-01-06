@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Producto</title>
+  <link rel="stylesheet" href="css/user.css">
+  <style>
+    .container { max-width: 1000px; margin: 0 auto; padding: 18px; }
+    .topbar { display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; }
+    .card { border:1px solid #ddd; border-radius:12px; padding:14px; background:#fff; }
+    .grid { display:grid; grid-template-columns: 320px 1fr; gap:18px; }
+    img { width:100%; height:320px; object-fit:cover; border-radius:12px; background:#f3f3f3; }
+    .btn { padding:10px 12px; border-radius:10px; border:0; cursor:pointer; }
+    .btn-primary { background:#2d6cdf; color:white; }
+    .btn-secondary { background:#eee; }
+    .muted { opacity:.75; }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <div class="topbar">
+      <button class="btn btn-secondary" id="goBack">← Volver</button>
+      <div>
+        <button class="btn btn-secondary" id="goCart">Carrito</button>
+        <button class="btn btn-secondary" id="logout">Cerrar sesión</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="grid">
+        <img id="img" alt="">
+        <div>
+          <h1 id="name" style="margin-top:0;"></h1>
+          <p class="muted" id="meta"></p>
+          <p id="description"></p>
+
+          <p><strong id="price"></strong></p>
+
+          <button class="btn btn-primary" id="add">Añadir al carrito</button>
+          <p id="message"></p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script type="module" src="js/product.js"></script>
+</body>
+</html>

@@ -10,8 +10,22 @@ const swaggerOptions = {
     },
     servers: [
         {
-            url: "http://localhost:3000",
-            description: "Local server"
+            url: "http://localhost:3000/api",
+            description: "Local API Server"
+        }
+    ],
+    components: {
+        securitySchemes: {
+            bearerAuth: {
+            type: "http",
+            scheme: "bearer",
+            bearerFormat: "JWT"
+            }
+        }
+    },
+    security: [
+        {
+            bearerAuth: []
         }
     ]
   },
