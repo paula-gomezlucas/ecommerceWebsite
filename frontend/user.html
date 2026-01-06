@@ -4,15 +4,107 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Mi cuenta</title>
-  <link rel="stylesheet" href="css/user.css">
   <style>
-    .container { max-width: 900px; margin: 0 auto; padding: 18px; }
-    .topbar { display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; }
-    .card { border:1px solid #ddd; border-radius:12px; padding:14px; background:#fff; }
-    .row { display:flex; gap:10px; flex-wrap:wrap; }
-    .btn { padding:10px 12px; border-radius:10px; border:0; cursor:pointer; background:#eee; }
-    .btn-primary { background:#2d6cdf; color:#fff; }
-    .muted { opacity:.75; }
+    /* base */
+     body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f8;
+      margin: 0;
+    }
+
+    h1 {
+      color: #047857;
+      margin: 0;
+    }
+
+    /* Layout */
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      gap: 10px;
+    }
+     /* Cart list */
+     .list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .item {
+      display: grid;
+      grid-template-columns: 80px 1fr auto auto auto;
+      gap: 12px;
+      align-items: center;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      background: #fff;
+    }
+
+    img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 10px;
+      background: #f3f3f3;
+    }
+   
+    input {
+      width: 70px;
+      padding: 6px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+     /* Buttons */
+        .btn {
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      background: #e5e7eb;
+    }
+
+    .btn-danger {
+      background: #c0392b;
+      color: white;
+    }
+
+    .btn-primary {
+      background: #047857;
+      color: white;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .msg {
+      margin-top: 12px;
+      min-height: 18px;
+    }
+
+    .muted {
+      opacity: 0.7;
+      margin: 12px 0;
+    }
+
+
   </style>
 </head>
 <body>
