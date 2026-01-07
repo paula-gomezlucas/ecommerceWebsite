@@ -20,24 +20,36 @@
 
 * { box-sizing: border-box; }
 
+html, body {
+  height: 100%;
+}
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background: var(--bg);
   color: var(--text);
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  padding: 18px;
 }
 
 /* Layout helpers */
 .container {
   margin: 0 auto;
   padding: 18px;
-  max-width: 900px;
+  width: 100%;
+  max-width: clamp(900px, 92vw, 1500px);
 }
 
 .container--sm { max-width: 500px; }
 .container--md { max-width: 900px; }
-.container--lg { max-width: 1000px; }
-.container--xl { max-width: 1100px; }
+.container--lg { max-width: 1200px; }
+.container--xl { max-width: 1400px; }
 
 .topbar {
   display: flex;
@@ -91,10 +103,23 @@ body {
 
 .btn-danger {
   background: var(--danger);
+  border: 0;
   color: #fff;
 }
 
 .btn-danger:hover { background: var(--danger-hover); }
+
+/* Active navigation button */
+.btn-tab-active {
+  background-color: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+/* Optional: avoid hover changing it */
+.btn-tab-active:hover {
+  background-color: var(--primary);
+}
 
 /* Inputs */
 input, select, textarea {
@@ -182,3 +207,39 @@ img {
   background: #e0f2fe;
   color: #075985;
 }
+
+footer {
+  background-color: #000000;
+  color: #fff;
+  text-align: center;
+  padding: 20px 10px;
+  font-size: 0.9em;
+}
+
+footer address {
+  font-style: normal;
+}
+
+/* ------------------------------
+   Status labels (orders)
+   ------------------------------ */
+.status {
+  font-weight: 600;
+}
+
+.status.confirmed {
+  color: #065f46;
+}
+
+.status.pending {
+  color: #92400e;
+}
+
+/* ------------------------------
+   Utilities
+   ------------------------------ */
+.ml-8 { margin-left: 8px; }
+.text-center { text-align: center; }
+.list-clean { list-style: none; padding: 0; margin: 0; }
+.review { padding: 12px 0; border-top: 1px solid rgba(0,0,0,0.08); }
+.review:first-child { border-top: 0; }

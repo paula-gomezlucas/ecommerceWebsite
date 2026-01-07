@@ -67,13 +67,19 @@ if (!session) {
 
         const status = document.createElement("span");
         status.className = "status " + (isConfirmed ? "confirmed" : "pending");
-        status.textContent = isConfirmed ? "Confirmado" : "Pendiente de confirmación";
+        status.textContent = isConfirmed
+          ? "Confirmado"
+          : "Pendiente de confirmación";
 
         const updated = document.createElement("span");
         if (isConfirmed && o.confirmed_at) {
-          updated.textContent = `Confirmado el ${new Date(o.confirmed_at).toLocaleString()}`;
+          updated.textContent = `Confirmado el ${new Date(
+            o.confirmed_at
+          ).toLocaleString()}`;
         } else {
-          updated.textContent = `Última actualización: ${new Date(o.updated_at).toLocaleString()}`;
+          updated.textContent = `Última actualización: ${new Date(
+            o.updated_at
+          ).toLocaleString()}`;
         }
 
         row2.appendChild(status);

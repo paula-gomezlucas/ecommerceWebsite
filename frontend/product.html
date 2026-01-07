@@ -1,40 +1,80 @@
-@ -0,0 +1,49 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Producto</title>
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/user.css">
-</head>
-<body>
-  <main class="container">
-    <div class="topbar">
-      <button class="btn btn-secondary" id="goBack">← Volver</button>
-      <div>
-        <button class="btn btn-secondary" id="goCart">Carrito</button>
-        <button class="btn btn-danger" id="logout">Cerrar sesión</button>
-      </div>
-    </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Producto</title>
 
-    <div class="card">
-      <div class="grid grid--product">
-        <img id="img" alt="" class="product-img">
-        <div>
-          <h1 id="name" class="no-margin"></h1>
-          <p class="muted" id="meta"></p>
-          <p id="description"></p>
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/user.css" />
+  </head>
 
-          <p><strong id="price"></strong></p>
+  <body>
+    <main class="container container--lg">
+      <article>
+        <header class="topbar">
+          <button id="goBack" class="btn btn-secondary" type="button">
+            ← Volver
+          </button>
 
-          <button class="btn btn-primary" id="add">Añadir al carrito</button>
-          <p id="message"></p>
-        </div>
-      </div>
-    </div>
-  </main>
+          <nav class="actions" aria-label="Acciones del producto">
+            <button id="goCart" class="btn btn-secondary" type="button">
+              Carrito
+            </button>
+            <button id="logout" class="btn btn-danger" type="button">
+              Cerrar sesión
+            </button>
+          </nav>
+        </header>
 
-  <script type="module" src="js/product.js"></script>
-</body>
+        <section class="card" aria-label="Detalle de producto">
+          <div class="grid grid--product">
+            <figure class="no-margin">
+              <img id="img" class="product-img" alt="Imagen del producto" />
+            </figure>
+
+            <section>
+              <header>
+                <h1 id="name" class="no-margin"></h1>
+                <p id="meta" class="muted"></p>
+              </header>
+
+              <p id="description"></p>
+
+              <p><strong id="price"></strong></p>
+
+              <div class="actions">
+                <button id="add" class="btn btn-primary" type="button">
+                  Añadir al carrito
+                </button>
+              </div>
+
+              <p id="message" class="msg" aria-live="polite"></p>
+            </section>
+          </div>
+        </section>
+        <section class="card" aria-label="Reseñas">
+          <header>
+            <h2 class="no-margin">Reseñas</h2>
+            <p id="ratingSummary" class="muted no-margin"></p>
+          </header>
+
+          <ul
+            id="reviewsList"
+            class="list-clean"
+            aria-label="Lista de reseñas"
+          ></ul>
+        </section>
+      </article>
+    </main>
+
+    <footer>
+      <address>
+        Universidad Europea de Madrid | Tel: 912345678 | Email: remote@ready.com
+      </address>
+      <p>© 2026 RemoteReady</p>
+    </footer>
+
+    <script type="module" src="js/product.js"></script>
+  </body>
 </html>

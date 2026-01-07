@@ -1,50 +1,94 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Catálogo</title>
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/user.css">
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Catálogo</title>
 
-<body>
-  <main class="container container--xl">
-    <div class="topbar">
-      <div>
-        <h1 style="margin:0;">Catálogo</h1>
-        <div class="muted" id="welcome"></div>
-      </div>
-      <div class="actions">
-        <button class="btn btn-secondary" id="goPanel"></button>
-        <button class="btn btn-secondary" id="goCart">Carrito</button>
-        <button class="btn btn-secondary" id="goOrders">Mis pedidos</button>
-        <button class="btn btn-danger" id="logout">Cerrar sesión</button>
-        <span id="roleBadge" class="badge"></span>
-      </div>
-    </div>
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/user.css" />
+  </head>
 
-    <div class="filters">
-      <label>
-        Categoría:
-        <select id="category">
-          <option value="">Todas</option>
-        </select>
-      </label>
+  <body>
+    <main class="container container--xl">
+      <article>
+        <header class="topbar">
+          <div>
+            <h1 class="no-margin">Catálogo</h1>
+            <p id="welcome" class="muted no-margin"></p>
+          </div>
 
-      <label>
-        Buscar:
-        <input id="search" type="text" placeholder="nombre o descripción">
-      </label>
+          <nav class="actions" aria-label="Acciones del catálogo">
+            <span id="roleBadge" class="badge" aria-label="Rol"></span>
+            <button
+              id="goPanel"
+              class="btn btn-secondary"
+              type="button"
+            ></button>
+            <button id="goCart" class="btn btn-secondary" type="button">
+              Carrito
+            </button>
+            <button id="goOrders" class="btn btn-secondary" type="button">
+              Mis pedidos
+            </button>
+            <button id="logout" class="btn btn-danger" type="button">
+              Cerrar sesión
+            </button>
+          </nav>
+        </header>
 
-      <span class="muted" id="count"></span>
-    </div>
+        <section aria-label="Filtros de búsqueda">
+          <form class="filters" autocomplete="off">
+            <label>
+              Categoría
+              <select id="category">
+                <option value="">Todas</option>
+              </select>
+            </label>
 
-    <p class="msg" id="message"></p>
+            <label>
+              Buscar
+              <input
+                id="search"
+                type="text"
+                placeholder="nombre o descripción"
+              />
+            </label>
 
-    <div class="grid" id="grid"></div>
-  </main>
+            <label>
+              Precio
+              <select id="priceRange">
+                <option value="">Todos</option>
+                <option value="0-50">0–50 €</option>
+                <option value="50-100">50–100 €</option>
+                <option value="100-250">100–250 €</option>
+                <option value="250-600">250–600 €</option>
+                <option value="600-1200">600–1200 €</option>
+                <option value="1200-999999">1200 €+</option>
+              </select>
+            </label>
 
-  <script type="module" src="js/catalog.js"></script>
-</body>
+            <output id="count" class="muted"></output>
+          </form>
+        </section>
+
+        <section aria-live="polite">
+          <p id="message" class="msg"></p>
+        </section>
+
+        <section aria-label="Listado de productos">
+          <div id="grid"></div>
+        </section>
+      </article>
+    </main>
+
+    <footer>
+      <address>
+        Universidad Europea de Madrid | Tel: 912345678 | Email: remote@ready.com
+      </address>
+      <p>© 2026 RemoteReady</p>
+    </footer>
+
+    <script type="module" src="js/catalog.js"></script>
+  </body>
 </html>

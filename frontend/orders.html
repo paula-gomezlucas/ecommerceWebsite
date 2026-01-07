@@ -1,29 +1,60 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Mis pedidos</title>
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/user.css">
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mis pedidos</title>
 
-<body>
-  <main class="container container--md;">
-    <div class="topbar">
-      <h1>Mis pedidos</h1>
-      <div>
-        <button class="btn" id="goCatalog">Catálogo</button>
-        <button class="btn" id="goCart">Carrito</button>
-        <button class="btn-danger" id="logout">Cerrar sesión</button>
-      </div>
-    </div>
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/user.css" />
+  </head>
 
-    <p id="empty" class="muted"></p>
-    <div class="list" id="list"></div>
-    <p id="message"></p>
-  </main>
+  <body>
+    <main class="container container--lg">
+      <article>
+        <header class="topbar">
+          <div>
+            <h1 class="no-margin">Mis pedidos</h1>
+            <p class="muted no-margin">
+              Consulta el estado de tus pedidos y su confirmación.
+            </p>
+          </div>
 
-  <script type="module" src="js/orders.js"></script>
-</body>
+          <nav class="actions" aria-label="Acciones de pedidos">
+            <button id="goCatalog" class="btn btn-secondary" type="button">
+              Catálogo
+            </button>
+            <button id="goCart" class="btn btn-secondary" type="button">
+              Carrito
+            </button>
+            <button id="logout" class="btn btn-danger" type="button">
+              Cerrar sesión
+            </button>
+          </nav>
+        </header>
+
+        <section aria-live="polite">
+          <p id="message" class="msg"></p>
+        </section>
+
+        <section aria-live="polite">
+          <p id="empty" class="muted"></p>
+        </section>
+        <br />
+        <br />
+        <section aria-label="Listado de pedidos">
+          <div id="list" class="list"></div>
+        </section>
+      </article>
+    </main>
+
+    <footer>
+      <address>
+        Universidad Europea de Madrid | Tel: 912345678 | Email: remote@ready.com
+      </address>
+      <p>© 2026 RemoteReady</p>
+    </footer>
+
+    <script type="module" src="js/orders.js"></script>
+  </body>
 </html>

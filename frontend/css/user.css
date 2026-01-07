@@ -14,7 +14,29 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
+  min-width: 180px; /* default width for category/price */
+  max-width: 100%;
 }
+
+/* Search should take the most space */
+.filters label:nth-child(2) {
+  flex: 1;
+  min-width: 260px;
+}
+
+/* Category and price: stable widths */
+.filters label:nth-child(1),
+.filters label:nth-child(3) {
+  flex: 0 0 200px;
+}
+
+/* Optional: keep the counter aligned nicely */
+.filters output {
+  margin-left: auto;
+  align-self: flex-end;
+  padding-bottom: 10px;
+}
+
 
 #grid {
   display: grid;

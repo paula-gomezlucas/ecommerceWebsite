@@ -3,26 +3,33 @@ import { requireLogin, handleAuthError } from "./guards.js";
 
 const session = requireLogin("login.html");
 
-function formatName(name) {
-  if (!name) return "";
-  const s = String(name).trim().toLowerCase();
-  return s.charAt(0).toUpperCase() + s.slice(1);
+function formatName(value) {
+  if (!value) return "";
+  return String(value)
+    .toLowerCase()
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
 }
 
 if (!session) {
   // redirected
 } else {
-  document.getElementById("welcome").textContent =
-  `Hola, ${formatName(session.user.username)}`;
+  document.getElementById("welcome").textContent = `Hola, ${formatName(
+    session.user.username
+  )}`;
 
   const grid = document.getElementById("grid");
   const categorySelect = document.getElementById("category");
   const searchInput = document.getElementById("search");
+  const priceRangeSelect = document.getElementById("priceRange");
   const count = document.getElementById("count");
   const message = document.getElementById("message");
   const goPanelBtn = document.getElementById("goPanel");
   const badge = document.getElementById("roleBadge");
-  badge.textContent = session.user.role === "admin" ? "Administrador" : "Usuario";
+
+  badge.textContent =
+    session.user.role === "admin" ? "Administrador" : "Usuario";
   badge.className = `badge badge-${session.user.role}`;
 
   if (session.user.role === "admin") {
@@ -75,7 +82,7 @@ if (!session) {
 
       const meta = document.createElement("div");
       meta.className = "muted";
-      meta.textContent = `${p.category} • Stock: ${p.stock}`;
+      meta.textContent = `${formatName(p.category)} • Stock: ${p.stock}`;
 
       const row = document.createElement("div");
       row.className = "row";
@@ -117,6 +124,7 @@ if (!session) {
   function refreshView() {
     const cat = categorySelect.value;
     const q = searchInput.value.trim().toLowerCase();
+    const priceRange = priceRangeSelect.value;
 
     let filtered = allProducts;
 
@@ -130,6 +138,17 @@ if (!session) {
       );
     }
 
+    if (priceRange) {
+      const [minStr, maxStr] = priceRange.split("-");
+      const min = Number(minStr);
+      const max = Number(maxStr);
+
+      filtered = filtered.filter((p) => {
+        const price = Number(p.price);
+        return !Number.isNaN(price) && price >= min && price <= max;
+      });
+    }
+
     render(filtered);
   }
 
@@ -139,7 +158,7 @@ if (!session) {
     for (const c of cats) {
       const opt = document.createElement("option");
       opt.value = c;
-      opt.textContent = c;
+      opt.textContent = formatName(c);
       categorySelect.appendChild(opt);
     }
   }
@@ -152,6 +171,7 @@ if (!session) {
 
       categorySelect.addEventListener("change", refreshView);
       searchInput.addEventListener("input", refreshView);
+      priceRangeSelect.addEventListener("change", refreshView);
 
       refreshView();
     } catch (err) {

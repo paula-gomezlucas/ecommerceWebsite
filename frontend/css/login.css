@@ -1,98 +1,124 @@
-body {
-    font-family: 'Inter', sans-serif;
-    margin: 0;
-    background: #9dbdf5;
-}
-
-.login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    padding: 20px;
-}
+/* css/login.css */
+/* Page-specific overrides for login.
+   Global layout/components live in base.css */
 
 .login-card {
-    background: white;
-    padding: 40px 32px;
-    width: 100%;
-    max-width: 380px;
-    border-radius: 12px;
-    box-shadow: 0 2px 15px rgba(0,0,0,0.08);
-    border: 1px solid #e5e7eb;
+  max-width: 420px;
+  margin: 40px auto;
+  padding: 24px;
 }
 
 .login-card h1 {
-    margin-top: 0;
-    margin-bottom: 24px;
-    font-size: 1.7rem;
-    text-align: center;
+  margin: 0 0 10px 0;
+  text-align: center;
 }
 
-.input-group {
-    margin-bottom: 18px;
+.login-card .muted {
+  text-align: center;
+  margin-top: 0;
 }
 
-.input-group label {
-    display: block;
-    margin-bottom: 6px;
-    font-size: 0.95rem;
-    font-weight: 600;
+.label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
 }
 
-.input-group input {
-    width: 100%;
-    padding: 10px 12px;
-    border-radius: 8px;
-    border: 1px solid #d1d5db;
-    font-size: 0.95rem;
+#error-message {
+  text-align: center;
 }
 
-.input-group input:focus {
-    outline: none;
-    border-color: #0070f3;
+.hero p {
+  margin-top: 8px;
+  font-size: 1.1rem;
+  color: var(--color-text-muted);
+  font-style: italic;
 }
 
-.btn-login {
-    width: 100%;
-    padding: 12px 0;
-    background: #0070f3;
-    border: none;
-    border-radius: 8px;
-    color: white;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.2s;
-    margin-top: 10px;
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr; /* about bigger than login */
+  gap: 16px;
 }
 
-.btn-login:hover {
-    background: #0057c2;
+.list-inline {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
-.btn-register {
-    width: 100%;
-    padding: 12px 0;
-    background: #0070f3;
-    border: none;
-    border-radius: 8px;
-    color: white;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.2s;
-    margin-top: 10px;
+.list-inline li {
+  padding: 6px 10px;
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: 999px;
 }
 
-.btn-register:hover {
-    background: #0057c2;
+/* Landing layout: stacked sections with clear width control */
+.landing {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 8px 0 26px;
 }
 
+/* About card: comfortable reading width and centered */
+.landing > section:first-child {
+  max-width: 980px;
+  margin: 0 auto;
+}
 
-.error-message {
-    color: #cc0000;
-    text-align: center;
-    margin-top: 12px;
-    font-size: 0.9rem;
+/* Login card: always narrower and centered */
+.login-card {
+  max-width: 460px;
+  margin: 0 auto;
+}
+
+/* Hero: centered and visually connected */
+.hero {
+  text-align: center;
+  padding: 42px 18px 12px;
+}
+
+.hero .company-name {
+  margin: 0;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.muted-text {
+  color: var(--color-text-muted);
+}
+
+.hero .muted-text {
+  margin: 10px auto 0;
+  max-width: 70ch;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.company-name {
+  font-weight: bold;
+  color: var(--color-primary);
+  text-align: center;
+
+}
+
+/* Login page card override */
+.card {
+  background: #fff;
+  border-radius: 16px;              /* softer corners */
+  padding: 22px 24px;               /* more breathing room */
+  border: 1px solid rgba(0,0,0,0.08);
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.06),
+    0 2px 6px rgba(0,0,0,0.04);      /* soft elevation */
+}
+
+.card h2 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.5rem;
 }

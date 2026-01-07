@@ -1,50 +1,112 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Iniciar sesión</title>
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/login.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>RemoteReady - Login</title>
 
-    <header>
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/login.css" />
+  </head>
+
+  <body>
+    <header class="hero" aria-label="RemoteReady">
+      <h1 class="company-name">RemoteReady</h1>
+      <p class="muted-text">
+        Curated gear and reliable setups for remote workers and digital nomads.
+      </p>
     </header>
+    <main class="container container--md">
+      <article class="landing">
+        <section class="card" aria-label="Sobre RemoteReady">
+          <h2 class="no-margin">Work anywhere, without setup chaos</h2>
+          <p class="muted-text">
+            RemoteReady is a curated store for people who work on the move. We
+            focus on portable, reliable, and practical gear that helps you build
+            a consistent setup anywhere.
+          </p>
 
-    <main class="login-container">
+          <ul>
+            <li>
+              <strong>Curated catalog</strong> — products selected for real
+              remote work constraints.
+            </li>
+            <li>
+              <strong>Compatibility-first</strong> — fewer surprises, more “it
+              just works”.
+            </li>
+            <li>
+              <strong>Built for mobility</strong> — portable, durable, and
+              travel-friendly choices.
+            </li>
+          </ul>
 
-        <div class="login-card">
+          <h3>Categories</h3>
+          <ul class="list-inline">
+            <li>Core Work</li>
+            <li>Ergonomics</li>
+            <li>Connectivity</li>
+            <li>Audio</li>
+            <li>Backup & Safety</li>
+          </ul>
 
-            <h1>Iniciar sesión</h1>
+          <h3>How it works</h3>
+          <ol>
+            <li>Browse curated products (no noise).</li>
+            <li>Add essentials to your cart.</li>
+            <li>Build a setup you can repeat anywhere.</li>
+          </ol>
+        </section>
+        <section class="card login-card" aria-label="Inicio de sesión">
+          <header>
+            <h2>Iniciar sesión</h2>
+            <p class="muted">Accede o crea una cuenta para continuar</p>
+          </header>
 
-            <div class="input-group">
-                <label for="username">Usuario</label>
-                <input type="text" id="username" name="username" placeholder="Introduce tu usuario">
-            </div>
+          <section aria-label="Formulario de acceso">
+            <form autocomplete="off">
+              <label class="label mt-12">
+                Usuario
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  placeholder="Introduce tu usuario"
+                />
+              </label>
 
-            <div class="input-group">
-                <label for="password">Contraseña</label>
-                <input type="password" id="password" name="password" placeholder="Introduce tu contraseña">
-            </div>
+              <label class="label mt-12">
+                Contraseña
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  placeholder="Introduce tu contraseña"
+                />
+              </label>
 
-            <button type="button" class="btn-login" id="btn-login">
-                Iniciar sesión
-            </button>
-
-            <button type="button" class="btn-register" id="btn-register">
-                Registrarse
-            </button>
-
-            <p class="error-message" id="error-message"></p>
-
-        </div>
-
+              <nav class="actions mt-12" aria-label="Acciones de acceso">
+                <button type="button" class="btn btn-primary" id="btn-login">
+                  Iniciar sesión
+                </button>
+                <button type="button" class="btn btn-secondary" id="btn-register">
+                  Registrarse
+                </button>
+              </nav>
+            </form>
+            <p id="error-message" class="msg" aria-live="polite"></p>
+          </section>
+        </section>
+      </article>
     </main>
 
     <footer>
+      <address>
+        Universidad Europea de Madrid | Tel: 912345678 | Email: remote@ready.com
+      </address>
+      <p>© 2026 RemoteReady</p>
     </footer>
 
     <script type="module" src="js/login.js"></script>
-</body>
+  </body>
 </html>
-

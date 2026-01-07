@@ -1,27 +1,77 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>User</title>
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/user.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mi cuenta</title>
 
-    <main class="container">
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/user.css" />
+  </head>
 
-        <h1>Bienvenido</h1>
+  <body>
+    <main class="container container--sm">
+      <article>
+        <header class="topbar">
+          <div>
+            <h1 class="no-margin">Mi cuenta</h1>
+            <p id="welcome" class="muted no-margin"></p>
+          </div>
 
-        <p class="role" id="user-role">
-            Usuario
-        </p>
+          <nav class="actions" aria-label="Acciones de usuario">
+            <span id="roleBadge" class="badge" aria-label="Rol"></span>
+            <button id="logout" class="btn btn-danger" type="button">
+              Cerrar sesión
+            </button>
+          </nav>
+        </header>
 
-        <button id="goCatalog">
-            Ir al catálogo
-        </button>
+        <section class="card">
+          <p id="role" class="muted no-margin"></p>
 
+          <nav class="actions mt-12" aria-label="Navegación de usuario">
+            <button id="goCatalog" class="btn btn-primary" type="button">
+              Ir al catálogo
+            </button>
+            <button id="goCart" class="btn btn-secondary" type="button">
+              Ver carrito
+            </button>
+            <button id="goOrders" class="btn btn-secondary" type="button">
+              Mis pedidos
+            </button>
+          </nav>
+        </section>
+        <section class="card" aria-label="Datos personales">
+          <header>
+            <h2 class="no-margin">Datos personales</h2>
+            <p class="muted no-margin">
+              Información usada para el envío de pedidos.
+            </p>
+          </header>
+
+          <dl class="mt-12">
+            <dt class="muted">Nombre completo</dt>
+            <dd id="fullName" class="no-margin"></dd>
+
+            <dt class="muted mt-12">Dirección</dt>
+            <dd id="address" class="no-margin"></dd>
+
+            <dt class="muted mt-12">Teléfono</dt>
+            <dd id="phone" class="no-margin"></dd>
+          </dl>
+
+          <p id="profileMsg" class="msg" aria-live="polite"></p>
+        </section>
+      </article>
     </main>
 
+    <footer>
+      <address>
+        Universidad Europea de Madrid | Tel: 912345678 | Email: remote@ready.com
+      </address>
+      <p>© 2026 RemoteReady</p>
+    </footer>
+
     <script type="module" src="js/user.js"></script>
-</body>
+  </body>
 </html>

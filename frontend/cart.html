@@ -4,34 +4,57 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Carrito</title>
+
     <link rel="stylesheet" href="css/base.css" />
     <link rel="stylesheet" href="css/user.css" />
   </head>
 
   <body>
-    <main class="container" class="container--lg;">
-      <div class="topbar">
-        <h1>Carrito</h1>
-        <div>
-          <button class="btn" id="goCatalog">Catálogo</button>
-          <button class="btn" id="goOrders">Mis pedidos</button>
-          <button class="btn-danger" id="logout">Cerrar sesión</button>
-        </div>
-      </div>
+    <main class="container container--lg">
+      <article>
+        <header class="topbar">
+          <h1 class="no-margin">Carrito</h1>
 
-      <p id="empty" class="muted"></p>
+          <nav class="actions" aria-label="Acciones del carrito">
+            <button id="goCatalog" class="btn btn-secondary" type="button">
+              Catálogo
+            </button>
+            <button id="goOrders" class="btn btn-secondary" type="button">
+              Mis pedidos
+            </button>
+            <button id="logout" class="btn btn-danger" type="button">
+              Cerrar sesión
+            </button>
+          </nav>
+        </header>
 
-      <div class="list" id="list"></div>
+        <section aria-live="polite">
+          <p id="empty" class="muted"></p>
+        </section>
 
-      <div class="card cart-summary">
-        <strong id="total" class="cart-summary__total"></strong>
-        <button class="btn btn-primary" id="checkout">Finalizar compra</button>
-      </div>
-      <p id="message" class="msg"></p>
-      <p id="empty" class="muted"></p>
+        <section aria-label="Elementos del carrito">
+          <div id="list" class="list"></div>
+        </section>
 
-      <p class="msg" id="message"></p>
+        <section class="card cart-summary" aria-label="Resumen del carrito">
+          <strong id="total" class="cart-summary__total"></strong>
+          <button id="checkout" class="btn btn-primary" type="button">
+            Finalizar compra
+          </button>
+        </section>
+
+        <section aria-live="polite">
+          <p id="message" class="msg"></p>
+        </section>
+      </article>
     </main>
+
+    <footer>
+      <address>
+        Universidad Europea de Madrid | Tel: 912345678 | Email: remote@ready.com
+      </address>
+      <p>© 2026 RemoteReady</p>
+    </footer>
 
     <script type="module" src="js/cart.js"></script>
   </body>

@@ -10,10 +10,21 @@ if (!session) {
 
   const productsSection = document.getElementById("productsSection");
   const ordersSection = document.getElementById("ordersSection");
+  const tabProductsBtn = document.getElementById("tabProducts");
+  const tabOrdersBtn = document.getElementById("tabOrders");
 
   const productsTbody = document.getElementById("productsTbody");
   const productsCount = document.getElementById("productsCount");
   const ordersTbody = document.getElementById("ordersTbody");
+
+  const editCard = document.getElementById("editCard");
+  const closeEditBtn = document.getElementById("closeEdit");
+  const saveEditBtn = document.getElementById("saveEdit");
+
+  closeEditBtn.addEventListener("click", () => {
+    editCard.classList.add("hidden");
+    msg.textContent = "";
+  });
 
   welcome.textContent = `Hola, ${session.user.username} (admin)`;
 
@@ -26,16 +37,24 @@ if (!session) {
     window.location.href = "catalog.html";
   });
 
-  document.getElementById("tabProducts").addEventListener("click", () => {
-    productsSection.classList.remove("hidden");
-    ordersSection.classList.add("hidden");
+  function setActiveTab(tab) {
+    const isProducts = tab === "products";
+
+    productsSection.classList.toggle("hidden", !isProducts);
+    ordersSection.classList.toggle("hidden", isProducts);
+
+    tabProductsBtn.classList.toggle("btn-tab-active", isProducts);
+    tabOrdersBtn.classList.toggle("btn-tab-active", !isProducts);
+
     msg.textContent = "";
+  }
+
+  tabProductsBtn.addEventListener("click", () => {
+    setActiveTab("products");
   });
 
-  document.getElementById("tabOrders").addEventListener("click", () => {
-    ordersSection.classList.remove("hidden");
-    productsSection.classList.add("hidden");
-    msg.textContent = "";
+  tabOrdersBtn.addEventListener("click", () => {
+    setActiveTab("orders");
     loadOrders(); // refresh when opening
   });
 
@@ -44,7 +63,9 @@ if (!session) {
   badge.className = "badge badge-admin";
 
   // ---------- PRODUCTS ----------
-  document.getElementById("createProduct").addEventListener("click", createProduct);
+  document
+    .getElementById("createProduct")
+    .addEventListener("click", createProduct);
 
   async function loadProducts() {
     productsTbody.innerHTML = "";
@@ -71,7 +92,7 @@ if (!session) {
         const btnEdit = document.createElement("button");
         btnEdit.className = "btn btn-secondary";
         btnEdit.textContent = "Editar";
-        btnEdit.addEventListener("click", () => editProductPrompt(p));
+        btnEdit.addEventListener("click", () => openEdit(p));
 
         const btnDelete = document.createElement("button");
         btnDelete.className = "btn btn-danger ml-8";
@@ -99,19 +120,27 @@ if (!session) {
         description: document.getElementById("p_description").value.trim(),
         price: Number(document.getElementById("p_price").value),
         stock: Number(document.getElementById("p_stock").value),
-        imageurl: document.getElementById("p_imageurl").value.trim()
+        imageurl: document.getElementById("p_imageurl").value.trim(),
       };
 
       await apiFetch("/products", {
         method: "POST",
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
       });
 
       showOk("Producto creado");
       // clear form
-      ["p_code","p_name","p_category","p_description","p_price","p_stock","p_imageurl"].forEach(id => {
+      [
+        "p_code",
+        "p_name",
+        "p_description",
+        "p_price",
+        "p_stock",
+        "p_imageurl",
+      ].forEach((id) => {
         document.getElementById(id).value = "";
       });
+      document.getElementById("p_category").value = "core-work";
 
       loadProducts();
     } catch (err) {
@@ -120,47 +149,49 @@ if (!session) {
     }
   }
 
-  async function editProductPrompt(p) {
-    // Simple prompt-based edit (fast + functional). If you want, we can make a modal later.
-    const name = prompt("Nombre", p.name);
-    if (name === null) return;
+  function openEdit(p) {
+    msg.textContent = "";
 
-    const category = prompt("Categoría", p.category);
-    if (category === null) return;
+    document.getElementById("e_id").value = p.id;
+    document.getElementById("e_name").value = p.name ?? "";
+    document.getElementById("e_category").value = p.category ?? "core-work";
+    document.getElementById("e_description").value = p.description ?? "";
+    document.getElementById("e_price").value = p.price ?? 0;
+    document.getElementById("e_stock").value = p.stock ?? 0;
+    document.getElementById("e_imageurl").value = p.imageurl ?? "";
 
-    const description = prompt("Descripción", p.description ?? "");
-    if (description === null) return;
+    editCard.classList.remove("hidden");
+    editCard.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
 
-    const priceStr = prompt("Precio (€)", String(p.price));
-    if (priceStr === null) return;
+  saveEditBtn.addEventListener("click", async () => {
+    msg.textContent = "";
 
-    const stockStr = prompt("Stock", String(p.stock));
-    if (stockStr === null) return;
-
-    const imageurl = prompt("Image URL (/images/...)", p.imageurl);
-    if (imageurl === null) return;
+    const id = Number(document.getElementById("e_id").value);
 
     const payload = {
-      name: name.trim(),
-      category: category.trim(),
-      description: description.trim(),
-      price: Number(priceStr),
-      stock: Number(stockStr),
-      imageurl: imageurl.trim()
+      name: document.getElementById("e_name").value.trim(),
+      category: document.getElementById("e_category").value, // <-- dropdown
+      description: document.getElementById("e_description").value.trim(),
+      price: Number(document.getElementById("e_price").value),
+      stock: Number(document.getElementById("e_stock").value),
+      imageurl: document.getElementById("e_imageurl").value.trim(),
     };
 
     try {
-      await apiFetch(`/products/${p.id}`, {
+      await apiFetch(`/products/${id}`, {
         method: "PUT",
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
       });
+
       showOk("Producto actualizado");
+      editCard.classList.add("hidden");
       loadProducts();
     } catch (err) {
       handleAuthError(err, "login.html");
       showError(err);
     }
-  }
+  });
 
   async function deleteProduct(id) {
     if (!confirm("¿Seguro que quieres eliminar este producto?")) return;
