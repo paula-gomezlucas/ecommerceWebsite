@@ -22,7 +22,7 @@ VALUES (
 ), 
 (
   'paula',
-  '$2b$10$HSC4wFSfKs.8.cgrjIzUvOK1Nr6EFmQ6z4aeupMwJR/H3O9lu9kfG',
+  '$2b$10$ePSDHEQu4nEUoaPiOfSBG.vByIiu7CnernC/Vdy0DAE9zCK943Ocq',
   'user',
   'Paula Gómez Lucas',
   '456 User Ave, User Town',
@@ -30,7 +30,7 @@ VALUES (
 ),
 (
   'anyi',
-  '$2b$10$HSC4wFSfKs.8.cgrjIzUvOK1Nr6EFmQ6z4aeupMwJR/H3O9lu9kfG',
+  '$2b$10$ePSDHEQu4nEUoaPiOfSBG.vByIiu7CnernC/Vdy0DAE9zCK943Ocq',
   'user',
   'Anyi Lin',
   '789 Customer Rd, Client City',
