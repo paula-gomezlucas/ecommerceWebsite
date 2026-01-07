@@ -24,4 +24,9 @@ if (!session) {
     clearSession();
     window.location.href = "login.html";
   });
+
+  const badge = document.getElementById("roleBadge");
+  badge.textContent = session.user.role === "admin" ? "Administrador" : "Usuario";
+  badge.className = `badge badge-${session.user.role}`;
+
 }

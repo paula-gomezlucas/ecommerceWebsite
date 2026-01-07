@@ -9,6 +9,14 @@ if (!session) {
   const emptyEl = document.getElementById("empty");
   const message = document.getElementById("message");
 
+  const flash = sessionStorage.getItem("flash");
+  const hadFlash = Boolean(flash);
+  if (flash) {
+    sessionStorage.removeItem("flash");
+    message.style.color = "green";
+    message.textContent = flash;
+  }
+
   document.getElementById("logout").addEventListener("click", () => {
     clearSession();
     window.location.href = "login.html";
@@ -20,13 +28,12 @@ if (!session) {
 
   document.getElementById("goCart").addEventListener("click", () => {
     window.location.href = "cart.html";
-});
-
+  });
 
   async function loadOrders() {
     list.innerHTML = "";
     emptyEl.textContent = "";
-    message.textContent = "";
+    if (!hadFlash) message.textContent = "";
 
     try {
       const orders = await apiFetch("/orders");
@@ -56,12 +63,14 @@ if (!session) {
         const row2 = document.createElement("div");
         row2.className = "row muted";
 
+        const isConfirmed = Boolean(o.confirmed_at || o.confirmed_by);
+
         const status = document.createElement("span");
-        status.className = "status " + (o.confirmed_at ? "confirmed" : "pending");
-        status.textContent = o.confirmed_at ? "Confirmado" : "Pendiente de confirmación";
+        status.className = "status " + (isConfirmed ? "confirmed" : "pending");
+        status.textContent = isConfirmed ? "Confirmado" : "Pendiente de confirmación";
 
         const updated = document.createElement("span");
-        if (o.confirmed_at) {
+        if (isConfirmed && o.confirmed_at) {
           updated.textContent = `Confirmado el ${new Date(o.confirmed_at).toLocaleString()}`;
         } else {
           updated.textContent = `Última actualización: ${new Date(o.updated_at).toLocaleString()}`;

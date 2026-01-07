@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { login, register } from "../controllers/users.controller.js";
+import { login, register, me } from "../controllers/users.controller.js";
 
 /**
  * @swagger
@@ -75,7 +75,40 @@ router.post("/", login);
  *         description: Usuario ya existe
  */
 
-
 router.post("/register", register);
+
+/**
+ * @swagger
+ * /users/me:
+ *   get:
+ *     summary: Obtener información del usuario autenticado
+ *     tags: [Auth]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Información del usuario
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                 username:
+ *                   type: string
+ *                 role:
+ *                   type: string
+ *                 full_name:
+ *                   type: string
+ *                 address:
+ *                   type: string
+ *                 phone:
+ *                   type: string
+ *       401:
+ *         description: No autorizado
+ */
+
+router.get("/me", me);
 
 export default router;

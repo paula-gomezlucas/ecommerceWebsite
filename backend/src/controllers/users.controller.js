@@ -70,3 +70,32 @@ export const login = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
+
+export const me = async (req, res) => {
+  try {
+    const auth = req.headers.authorization || "";
+    const token = auth.startsWith("Bearer ") ? auth.slice(7) : null;
+
+    if (!token) {
+      return res.status(401).json({ error: "Missing token" });
+    }
+
+    const row = await db.get(
+      `
+      SELECT u.id, u.username, u.role, u.full_name, u.address, u.phone
+      FROM sessions s
+      JOIN users u ON u.id = s.user_id
+      WHERE s.token = ?
+      `,
+      [token]
+    );
+
+    if (!row) {
+      return res.status(401).json({ error: "Invalid session" });
+    }
+
+    res.json({ user: row });
+  } catch (err) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+};

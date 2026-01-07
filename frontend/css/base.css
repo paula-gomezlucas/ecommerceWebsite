@@ -156,3 +156,29 @@ img {
   background: #f3f3f3;
   border-radius: var(--radius);
 }
+
+.ml-8 { 
+    margin-left: 8px; 
+    align-self: last baseline;
+}
+
+.badge {
+  padding: 4px 8px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.badge-admin {
+  background: #8a680c;
+  color: #ffffff;
+}
+
+.badge-user {
+  background: #e0f2fe;
+  color: #075985;
+}

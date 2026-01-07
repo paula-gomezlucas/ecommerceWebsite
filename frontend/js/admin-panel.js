@@ -39,6 +39,10 @@ if (!session) {
     loadOrders(); // refresh when opening
   });
 
+  const badge = document.getElementById("roleBadge");
+  badge.textContent = "Administrador";
+  badge.className = "badge badge-admin";
+
   // ---------- PRODUCTS ----------
   document.getElementById("createProduct").addEventListener("click", createProduct);
 
@@ -70,8 +74,7 @@ if (!session) {
         btnEdit.addEventListener("click", () => editProductPrompt(p));
 
         const btnDelete = document.createElement("button");
-        btnDelete.className = "btn btn-danger";
-        btnDelete.style.marginLeft = "8px";
+        btnDelete.className = "btn btn-danger ml-8";
         btnDelete.textContent = "Eliminar";
         btnDelete.addEventListener("click", () => deleteProduct(p.id));
 

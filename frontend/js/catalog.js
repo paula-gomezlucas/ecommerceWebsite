@@ -21,6 +21,9 @@ if (!session) {
   const count = document.getElementById("count");
   const message = document.getElementById("message");
   const goPanelBtn = document.getElementById("goPanel");
+  const badge = document.getElementById("roleBadge");
+  badge.textContent = session.user.role === "admin" ? "Administrador" : "Usuario";
+  badge.className = `badge badge-${session.user.role}`;
 
   if (session.user.role === "admin") {
     goPanelBtn.textContent = "Panel admin";

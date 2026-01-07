@@ -129,6 +129,7 @@ if (!session) {
   async function checkout() {
     try {
       await apiFetch("/orders/cart/checkout", { method: "POST" });
+      sessionStorage.setItem("flash", "Pedido confirmado correctamente");
       window.location.href = "orders.html";
     } catch (err) {
       handleAuthError(err, "login.html");
